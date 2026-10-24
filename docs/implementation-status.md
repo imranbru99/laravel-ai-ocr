@@ -1,6 +1,6 @@
 # Implementation and release status
 
-The package implementation is complete as a local release candidate. It includes
+The package implementation is released as v1.0.0. It includes
 native extraction, local OCR, quality gates, scoped AI fallback, schemas and 23
 built-in types, grounded fields, verification/consensus, private storage, cache,
 queues and page batches, API, Studio, Filament, commands, fakes and documentation.
@@ -49,8 +49,9 @@ usable Git metadata. Publishing uses a separate writable clone of
 `https://github.com/imranbru99/laravel-ai-ocr`, preserving its existing remote
 history and copyright notice. The original protected directory remains untouched.
 Both author and committer are verified as Imran Ahmed <me@imrandev.bd> before
-committing. A source push does not create a stable release tag or publish to
-Packagist; those are separate release steps.
+committing. The initial stable GitHub release is v1.0.0. Packagist indexing remains a
+separate integration step. Hosted Actions were blocked before runner execution
+by an account billing lock; validation was performed locally.
 
 The local archive is generated with `php tools/build-release.php`; its SHA-256 is
 written to `dist/SHA256SUMS`. It contains production sources and first-party

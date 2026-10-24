@@ -6,6 +6,7 @@
 <p align="center"><strong>Turn documents into structured, validated data your Laravel application can use.</strong><br>Manual first. AI when needed. Visibility at every step.</p>
 
 <p align="center">
+  <a href="https://github.com/imranbru99/laravel-ai-ocr/releases/latest"><img src="https://img.shields.io/github/v/release/imranbru99/laravel-ai-ocr?style=flat-square&amp;color=087F76" alt="Latest stable release"></a>
   <img src="https://img.shields.io/badge/PHP-8.2%2B-777BB4?style=flat-square" alt="PHP 8.2 and later">
   <img src="https://img.shields.io/badge/Laravel-10–13-FF2D20?style=flat-square" alt="Laravel 10 through 13">
   <img src="https://img.shields.io/badge/Document_types-23-087F76?style=flat-square" alt="23 built-in document types">
@@ -33,7 +34,7 @@ $invoice = $result->data();
 $totalMinorUnits = $result->field('total')->value;
 ```
 
-**Release status:** implemented local release candidate; no stable version has been tagged or published. Local checks include fresh Laravel 10–13 installations, 11 PHP/Laravel runtime combinations, Filament 3/4, level-8 static analysis, and the coverage gates described in the [validation report](docs/validation.md). Laravel 13 requires PHP 8.3+. Historical framework compatibility does not imply those dependencies remain secure for production.
+**Current release: [v1.0.0](https://github.com/imranbru99/laravel-ai-ocr/releases/tag/v1.0.0).** The first stable GitHub release is dated October 25, 2026. Composer versions come from Git tags; Packagist must index the tag before it appears there as a stable version. Local checks include fresh Laravel 10–13 installations, 11 PHP/Laravel runtime combinations, Filament 3/4, level-8 static analysis, and the coverage gates described in the [validation report](docs/validation.md). Laravel 13 requires PHP 8.3+. Historical framework compatibility does not imply those dependencies remain secure for production.
 
 ## Explore this README
 
@@ -229,9 +230,9 @@ PSR streams are detached/consumed by the resolver. Files supplied by application
 - Poppler and Tesseract for the recommended PDF/local OCR workflow.
 - Laravel `APP_KEY` for encrypted caches, optional persistence and encrypted queued jobs.
 
-### Install from the current source
+### Install from source
 
-Until a stable package version is published, clone/download this repository and use a Composer path repository in your Laravel application:
+For local development, clone/download this repository and use a Composer path repository in your Laravel application. The `@dev` constraint below is only for a local working checkout:
 
 ```bash
 composer config repositories.ai-ocr path /absolute/path/to/laravel-ai-ocr
@@ -239,10 +240,10 @@ composer require imrandevbd/laravel-ai-ocr:@dev
 php artisan ai-ocr:install
 ```
 
-After publication, normal installation will be:
+Once Packagist has indexed the release, install the stable version with:
 
 ```bash
-composer require imrandevbd/laravel-ai-ocr
+composer require imrandevbd/laravel-ai-ocr:^1.0
 php artisan ai-ocr:install
 ```
 
@@ -270,6 +271,14 @@ AI_OCR_STUDIO=false
 ```
 
 Configure model providers and their credentials in **AI Hub**. OCR does not maintain a second key store. Keep Studio off until its access policy is configured. Use `AI_OCR_AI=false` for a local-only deployment.
+
+### Before your first production deployment
+
+- Run `ai-ocr:doctor` on the same environment used by queue workers.
+- Configure Studio/API authorization and document-specific privacy policies.
+- Verify required language packs, private shared storage, `APP_KEY` and queue workers.
+- Test representative documents, set AI spending limits, and define a human-review threshold.
+- Schedule retention pruning and monitor warnings, corrections and actual provider usage.
 
 ## Quick start
 
@@ -795,7 +804,7 @@ php tools/build-release.php
 
 The default tests block stray HTTP calls and use AI Hub fakes. An opt-in `live` suite is separate and requires `AI_OCR_LIVE=true`; it can spend money using configured providers. No billable live-provider calls were made for these validation results.
 
-Historical Laravel 10/11 tests use isolated Composer advisory overrides for dependency resolution. Consumer security defaults remain enabled. The CI workflow defines matrix/coverage/Filament jobs; local success is not a claim that hosted GitHub Actions has run. Full [evidence and reproduction notes](docs/validation.md).
+Historical Laravel 10/11 tests use isolated Composer advisory overrides for dependency resolution. Consumer security defaults remain enabled. The CI workflow defines matrix/coverage/Filament jobs. The first hosted run was blocked before execution by an account billing lock; the release validation reported here was performed locally. Full [evidence and reproduction notes](docs/validation.md).
 
 ## Frequently asked questions
 
@@ -872,7 +881,7 @@ The MIT license permits commercial use subject to its terms. Owner-scoped storag
 <details>
 <summary><strong>How do I upgrade or publish a stable version?</strong></summary>
 
-Review CHANGELOG, preserve local privacy policies when publishing config, run migrations/tests and verify model pricing/capabilities. No stable migration path is claimed before v1.0.0. The release guide explains identity checks, validation, tagging and Packagist submission. This workspace has not published or tagged a stable release.
+Review CHANGELOG, preserve local privacy policies when publishing config, run migrations/tests and verify model pricing/capabilities. Version 1.0.0 establishes the initial stable release. Future compatibility changes will be recorded in CHANGELOG. The release guide explains identity checks, validation, tagging and Packagist submission.
 
 </details>
 

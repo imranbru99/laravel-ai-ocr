@@ -1,7 +1,7 @@
-# Release candidate validation
+# Version 1.0.0 validation
 
 Validated locally on 2026-10-25 by running the package, not by assuming the hosted
-CI result. No stable version was tagged or published. All AI paths in the default
+CI result. These local checks support the v1.0.0 release. All AI paths in the default
 suite use fakes and block stray HTTP calls.
 
 ## Main checks
@@ -67,8 +67,8 @@ queues/page merging, review/rerun, webhooks and the 300-page memory regression.
 
 Sanitized local logs and Clover report are copied into `dist/validation/`. Re-run
 checks using [release instructions](release.md). GitHub Actions contains the
-runtime matrix, coverage gate and optional Filament jobs; it has not been run on
-GitHub from this protected, uninitialized checkout. The source archive intentionally
+runtime matrix, coverage gate and optional Filament jobs; the first hosted run was blocked before runner execution by an account billing
+lock. No hosted CI success is claimed. The source archive intentionally
 omits tests/docs according to the requested distribution policy; the full local
 workspace includes both. [Scope boundaries](implementation-status.md) list the
 remaining deployment-dependent limits explicitly.

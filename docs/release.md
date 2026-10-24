@@ -1,6 +1,6 @@
 # Publish the package
 
-The source is a local release candidate. Review [validation](validation.md) and
+Version 1.0.0 is the initial stable GitHub release. These steps describe the release process. Review [validation](validation.md) and
 [scope boundaries](implementation-status.md) before creating a stable release.
 The local protected `.git` directory must not be replaced to bypass permissions;
 use a normal writable checkout of `imranbru99/laravel-ai-ocr`.
