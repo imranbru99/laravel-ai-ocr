@@ -6,7 +6,9 @@ namespace ImranDevBd\AiOcr\Http\Controllers;
 
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
+use Illuminate\Http\JsonResponse;
 use ImranDevBd\AiOcr\Models\Extraction;
+use ImranDevBd\AiOcr\Support\AiProviderPanel;
 use ImranDevBd\AiOcr\Support\Analytics;
 use ImranDevBd\AiOcr\Support\Doctor;
 use ImranDevBd\AiOcr\Support\Owner;
@@ -14,6 +16,11 @@ use ImranDevBd\AiOcr\Types\TypeRegistry;
 
 final class StudioController
 {
+    public function providers(AiProviderPanel $panel): JsonResponse
+    {
+        return response()->json($panel->data())->header('Cache-Control', 'private, no-store');
+    }
+
     public function index(): View
     {
         $history = collect();
@@ -31,6 +38,6 @@ final class StudioController
         /** @var view-string $template */
         $template = 'ai-ocr::studio';
 
-        return app(Factory::class)->make($template, ['doctor' => app(Doctor::class)->report(), 'types' => app(TypeRegistry::class)->names(), 'history' => $history, 'analytics' => config('ai-ocr.store.enabled') ? app(Analytics::class)->summary() : []]);
+        return app(Factory::class)->make($template, ['aiPanel' => app(AiProviderPanel::class)->data(), 'doctor' => app(Doctor::class)->report(), 'types' => app(TypeRegistry::class)->names(), 'history' => $history, 'analytics' => config('ai-ocr.store.enabled') ? app(Analytics::class)->summary() : []]);
     }
 }

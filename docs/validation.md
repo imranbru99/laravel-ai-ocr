@@ -1,14 +1,14 @@
-# Version 1.0.0 validation
+# Version 1.1.0 validation
 
 Validated locally on 2026-10-25 by running the package, not by assuming the hosted
-CI result. These local checks support the v1.0.0 release. All AI paths in the default
+CI result. These local checks support the v1.1.0 release. All AI paths in the default
 suite use fakes and block stray HTTP calls.
 
 ## Main checks
 
 | Check | Result |
 |---|---|
-| Main suite, PHP 8.5.4 / Laravel 13.38.0 with Imagick/GD | 96 tests, 344 assertions, one optional Filament test skipped |
+| Main suite, PHP 8.5.4 / Laravel 13.38.0 with Imagick/GD | 103 tests, 383 assertions, one optional Filament test skipped |
 | PHPStan / Larastan, level 8 on current dependencies | Zero errors |
 | Laravel Pint | Passed with both current and PHP-8.2-compatible formatter versions |
 | Composer strict validation | Passed |
@@ -17,13 +17,13 @@ suite use fakes and block stray HTTP calls.
 | Studio browser check | Authorization enforced; schema builder adds a required field and applies it to Playground |
 | Fresh application installation | Laravel 10, 11, 12 and 13: dependency resolution, package discovery, doctor and types commands passed |
 
-The default host suite without optional image codecs passes 96 tests / 339
+The default host suite without optional image codecs passes 103 tests / 378
 assertions with three skips. Real Imagick/GD paths were separately exercised in
 the coverage run. Optional Filament runs exercise the remaining integration.
 
 ## Runtime matrix
 
-Each cell below ran the complete 96-test package suite (339 assertions, three
+Each cell below ran the complete 103-test package suite (378 assertions, three
 optional-dependency skips) and formatting inside disposable PHP CLI containers.
 
 | PHP | Laravel 10 | Laravel 11 | Laravel 12 | Laravel 13 |
@@ -33,10 +33,10 @@ optional-dependency skips) and formatting inside disposable PHP CLI containers.
 | 8.4 | Pass | Pass | Pass | Pass |
 
 The prefer-lowest / prefer-stable combination on PHP 8.2 + Laravel 10 also passes
-96 tests / 339 assertions. Minimum-dependency testing checks runtime compatibility;
+103 tests / 378 assertions. Minimum-dependency testing checks runtime compatibility;
 formatting uses current compatible Pint, whose rules differ from early releases.
-Filament 3 and 4, each installed alongside Laravel 12 / PHP 8.3, pass 96 tests /
-343 assertions with two image-codec skips, plus formatting.
+Filament 3 and 4, each installed alongside Laravel 12 / PHP 8.3, pass 103 tests /
+382 assertions with two image-codec skips, plus formatting.
 
 Laravel 10/11 dependency resolution requires `--no-security-blocking` in these
 isolated historical tests because Composer reports upstream advisories. Consumer
@@ -72,3 +72,15 @@ lock. No hosted CI success is claimed. The source archive intentionally
 omits tests/docs according to the requested distribution policy; the full local
 workspace includes both. [Scope boundaries](implementation-status.md) list the
 remaining deployment-dependent limits explicitly.
+
+## Visual provider setup regression checks
+
+The v1.1.0 suite adds seven tests for visual forms, custom Hub route prefixes,
+secret non-disclosure, configuration-only readiness, disabled UI/allowlists,
+Hub-backed saving, preserved blank keys, and independent Hub authorization.
+Browser checks used synthetic credentials to save providers, change the default,
+refresh status and select the provider/model in Playground. Password fields
+cleared after saving; no billable inference request was sent.
+
+The full 11-cell runtime matrix was repeated for this feature and passed with
+103 tests / 378 assertions and three optional-dependency skips per cell.

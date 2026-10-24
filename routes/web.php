@@ -11,6 +11,7 @@ use ImranDevBd\AiOcr\Http\Middleware\AuthorizeStudio;
 if (config('ai-ocr.studio.enabled') ?? app()->environment('local')) {
     Route::prefix(config('ai-ocr.studio.path', 'ai-ocr'))->middleware([...config('ai-ocr.studio.middleware', ['web']), AuthorizeStudio::class])->group(function (): void {
         Route::get('/', [StudioController::class, 'index'])->name('ai-ocr.studio');
+        Route::get('/providers', [StudioController::class, 'providers'])->name('ai-ocr.studio.providers');
         Route::get('/extract/{id}', [ExtractionController::class, 'show']);
         Route::post('/extractions/{id}/rerun', [ExtractionController::class, 'rerun']);
         Route::post('/extractions/{id}/review', [ExtractionController::class, 'review']);

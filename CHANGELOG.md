@@ -4,6 +4,19 @@ All notable changes follow Keep a Changelog and semantic versioning.
 
 ## [Unreleased]
 
+## [1.1.0] - 2026-10-25
+
+### Added
+- Visual AI Providers tab inside OCR Studio with password key fields, model selection, enabled/default controls and provider configuration status.
+- Direct use of AI Hub's protected settings endpoint; existing authorization, storage and custom route prefixes remain in effect.
+- Refresh status and Use in Playground actions without discarding the current document.
+- Visual setup guide, real provider-panel screenshot and regression tests for secret non-disclosure, blank-key preservation and independent Hub permissions.
+
+### Validation
+- 103 tests / 383 assertions with optional image codecs; one optional Filament skip. Core coverage gates remain above 90%.
+- All 11 supported PHP/Laravel runtime combinations pass the expanded 103-test suite and formatting.
+- Saving provider settings sends no inference request; browser verification used synthetic credentials only.
+
 ## [1.0.0] - 2026-10-25
 
 ### Added
@@ -26,5 +39,6 @@ All notable changes follow Keep a Changelog and semantic versioning.
 
 See docs/implementation-status.md for deployment-dependent boundaries.
 
-[Unreleased]: https://github.com/imranbru99/laravel-ai-ocr/compare/v1.0.0...HEAD
+[Unreleased]: https://github.com/imranbru99/laravel-ai-ocr/compare/v1.1.0...HEAD
+[1.1.0]: https://github.com/imranbru99/laravel-ai-ocr/compare/v1.0.0...v1.1.0
 [1.0.0]: https://github.com/imranbru99/laravel-ai-ocr/releases/tag/v1.0.0

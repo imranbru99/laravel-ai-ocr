@@ -25,10 +25,12 @@ laravel-ai-ocr/
 │   ├── images/
 │   │   ├── README.md
 │   │   ├── hero.svg
+│   │   ├── studio-ai-providers.png
 │   │   ├── studio-doctor.png
 │   │   ├── studio-extraction.png
 │   │   └── studio-schema-builder.png
 │   ├── ai-hub-integration.md
+│   ├── ai-providers.md
 │   ├── configuration.md
 │   ├── custom-drivers.md
 │   ├── custom-types.md
@@ -160,6 +162,7 @@ laravel-ai-ocr/
 │   │   ├── ManualMapper.php
 │   │   └── Schema.php
 │   ├── Support/
+│   │   ├── AiProviderPanel.php
 │   │   ├── Analytics.php
 │   │   ├── Binaries.php
 │   │   ├── Doctor.php
@@ -193,6 +196,7 @@ laravel-ai-ocr/
 ├── tests/
 │   ├── Feature/
 │   │   ├── AiBoundaryTest.php
+│   │   ├── AiProviderPanelTest.php
 │   │   ├── AiReliabilityTest.php
 │   │   ├── ApiTest.php
 │   │   ├── FilamentTest.php
@@ -223,6 +227,7 @@ laravel-ai-ocr/
 ├── .dockerignore
 ├── .gitattributes
 ├── .gitignore
+├── AGENTS.md
 ├── CHANGELOG.md
 ├── CONTRIBUTING.md
 ├── LICENSE

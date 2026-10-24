@@ -34,7 +34,7 @@ $invoice = $result->data();
 $totalMinorUnits = $result->field('total')->value;
 ```
 
-**Current release: [v1.0.0](https://github.com/imranbru99/laravel-ai-ocr/releases/tag/v1.0.0).** The first stable GitHub release is dated October 25, 2026. Composer versions come from Git tags; Packagist must index the tag before it appears there as a stable version. Local checks include fresh Laravel 10–13 installations, 11 PHP/Laravel runtime combinations, Filament 3/4, level-8 static analysis, and the coverage gates described in the [validation report](docs/validation.md). Laravel 13 requires PHP 8.3+. Historical framework compatibility does not imply those dependencies remain secure for production.
+**Current release: [v1.1.0](https://github.com/imranbru99/laravel-ai-ocr/releases/tag/v1.1.0).** Visual AI provider configuration is available directly inside OCR Studio. Composer versions come from Git tags; Packagist must index the tag before it appears there as a stable version. Local checks include fresh Laravel 10–13 installations, 11 PHP/Laravel runtime combinations, Filament 3/4, level-8 static analysis, and the coverage gates described in the [validation report](docs/validation.md). Laravel 13 requires PHP 8.3+. Historical framework compatibility does not imply those dependencies remain secure for production.
 
 ## Explore this README
 
@@ -270,7 +270,24 @@ AI_OCR_STORE=false
 AI_OCR_STUDIO=false
 ```
 
-Configure model providers and their credentials in **AI Hub**. OCR does not maintain a second key store. Keep Studio off until its access policy is configured. Use `AI_OCR_AI=false` for a local-only deployment.
+Configure model providers and their credentials visually in **OCR Studio → AI Providers**, or in **AI Hub**. Both interfaces use AI Hub’s existing settings store; OCR does not maintain a second key store. Keep Studio off until its access policy is configured. Use `AI_OCR_AI=false` for a local-only deployment.
+
+### Add AI API keys visually
+
+```dotenv
+AI_OCR_STUDIO=true
+AI_HUB_UI=true
+```
+
+After [authorizing both interfaces](docs/ai-providers.md#authorize-both-interfaces), open
+**`/ai-ocr` → AI Providers → paste API key → choose model → Save**.
+You can enable/disable a provider, make it the default, and select it for the
+Playground. No `.env` key editing is required when using the Hub settings backend.
+Blank keys keep existing credentials; saving sends no AI inference request.
+
+![AI provider API key and model configuration inside OCR Studio](docs/images/studio-ai-providers.png)
+
+[Full visual setup guide, permissions and environment alternatives](docs/ai-providers.md).
 
 ### Before your first production deployment
 
@@ -593,6 +610,7 @@ You can also define the `viewAiOcr` Gate or configure role/email allowlists.
 
 | Screen or action | What operators get |
 |---|---|
+| AI Providers | Password key entry, models, enabled/default controls, configuration status and shared AI Hub settings |
 | Playground | Drag/drop upload, preview, strategy, provider/model, type/schema, languages, DPI, sync/queue/page-parallel controls |
 | Extraction viewer | Source beside text/JSON, engine badges, confidence-colored words and JSON download |
 | Trace | Processing steps, quality decisions, warnings and usage information |
@@ -793,7 +811,7 @@ php tools/build-release.php
 
 | Locally verified check | Result |
 |---|---|
-| Main suite with optional image codecs | 96 tests, 344 assertions; one optional Filament skip |
+| Main suite with optional image codecs | 103 tests, 383 assertions; one optional Filament skip |
 | PHP 8.2/8.3/8.4 × supported Laravel 10/11/12/13 combinations | All 11 combinations pass |
 | Fresh Laravel application installs | Versions 10, 11, 12 and 13 pass discovery, Doctor and type listing |
 | Optional Filament integration | Versions 3 and 4 pass |
@@ -890,6 +908,7 @@ Review CHANGELOG, preserve local privacy policies when publishing config, run mi
 | Guide | What it covers |
 |---|---|
 | [Installation and binaries](docs/installation-binaries.md) | Linux, macOS, Windows, Docker, VPS/FastPanel, Poppler and language packs |
+| [Visual AI provider setup](docs/ai-providers.md) | Inline API key/model forms, Hub permissions and shared settings |
 | [Configuration](docs/configuration.md) | All configuration groups, defaults and environment shortcuts |
 | [AI Hub integration](docs/ai-hub-integration.md) | Verified dependency source, readiness, image transport, settings and adapters |
 | [Schemas and evidence](docs/schemas.md) | Fluent/raw schemas, rules, callbacks and grounded fields |

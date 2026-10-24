@@ -43,3 +43,9 @@ for panel integration. API defaults require the host's Sanctum installation.
 Use `manualOnly()` or `AI_OCR_AI=false` for offline operation. `send_text_only`
 and redaction policies block image transmission. Provider budget checks are
 estimates, so use provider-side spending limits for contractual caps.
+
+## Visual API key setup
+
+Enable `AI_HUB_UI=true` alongside Studio and open **AI Providers**. The inline
+forms use AI Hub’s protected settings endpoint and require its authorization.
+See [visual provider setup](ai-providers.md) for exact steps and permission hooks.
