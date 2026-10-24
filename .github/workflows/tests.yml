@@ -1,0 +1,70 @@
+name: Tests
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        php: ['8.2', '8.3', '8.4']
+        laravel: ['10', '11', '12', '13']
+        dependencies: [highest]
+        exclude:
+          - {php: '8.2', laravel: '13'}
+        include:
+          - {php: '8.2', laravel: '10', dependencies: lowest}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: shivammathur/setup-php@v2
+        with:
+          php-version: ${{ matrix.php }}
+          extensions: mbstring, fileinfo, dom, xml, zip, curl, pdo_sqlite
+          coverage: none
+      - run: sudo apt-get update && sudo apt-get install -y poppler-utils tesseract-ocr tesseract-ocr-eng tesseract-ocr-ben
+      - run: composer require --dev 'laravel/framework:^${{ matrix.laravel }}.0' --no-update --no-interaction
+      - if: matrix.dependencies == 'highest' && (matrix.laravel == '10' || matrix.laravel == '11')
+        run: composer update --prefer-dist --prefer-stable --no-interaction --no-security-blocking
+      - if: matrix.dependencies == 'highest' && matrix.laravel != '10' && matrix.laravel != '11'
+        run: composer update --prefer-dist --prefer-stable --no-interaction
+      - if: matrix.dependencies == 'lowest'
+        run: composer update --prefer-dist --prefer-lowest --prefer-stable --no-interaction --no-security-blocking
+      - run: composer test
+      - if: matrix.dependencies != 'lowest'
+        run: vendor/bin/pint --test
+  coverage:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.4'
+          extensions: mbstring, fileinfo, dom, xml, zip, curl, pdo_sqlite, gd, imagick
+          coverage: xdebug
+      - run: sudo apt-get update && sudo apt-get install -y poppler-utils tesseract-ocr tesseract-ocr-eng tesseract-ocr-ben
+      - run: composer update --prefer-dist --prefer-stable --no-interaction
+      - run: composer analyse
+      - run: vendor/bin/phpunit --coverage-clover coverage.xml --coverage-text
+      - run: php tools/check-coverage.php coverage.xml
+      - uses: actions/upload-artifact@v4
+        with:
+          name: coverage
+          path: coverage.xml
+  filament:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        filament: ['3', '4']
+    steps:
+      - uses: actions/checkout@v4
+      - uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.3'
+          extensions: mbstring, fileinfo, dom, xml, zip, curl, pdo_sqlite, intl
+          coverage: none
+      - run: sudo apt-get update && sudo apt-get install -y poppler-utils tesseract-ocr
+      - run: composer require --dev 'filament/filament:^${{ matrix.filament }}.0' --no-update --no-interaction
+      - run: composer update --prefer-dist --prefer-stable --no-interaction
+      - run: composer test

@@ -1,0 +1,14 @@
+includes:
+    - vendor/larastan/larastan/extension.neon
+parameters:
+    level: 8
+    paths:
+        - src
+        - tests/Fixtures/OcrOwner.php
+    treatPhpDocTypesAsCertain: false
+    viewDirectories:
+        - resources/views
+    stubFiles:
+        - stubs/filament.stub
+    scanFiles:
+        - stubs/filament.stub

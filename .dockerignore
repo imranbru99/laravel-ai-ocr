@@ -1,0 +1,9 @@
+vendor
+tests/Recon/vendor
+.git
+.agents
+.aws
+.codex
+.phpunit.cache
+.env
+coverage*

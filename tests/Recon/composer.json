@@ -1,0 +1,8 @@
+{
+    "require": {
+        "imrandevbd/laravel-ai-hub": "^1.6"
+    },
+    "require-dev": {
+        "orchestra/testbench": "^11.0"
+    }
+}

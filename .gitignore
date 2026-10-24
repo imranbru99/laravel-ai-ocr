@@ -1,0 +1,9 @@
+/vendor/
+/tests/Recon/vendor/
+/.phpunit.cache/
+/.phpunit.result.cache
+/.phpunit.cache
+
+/dist/
+/coverage.xml
+/.phpstan-cache/

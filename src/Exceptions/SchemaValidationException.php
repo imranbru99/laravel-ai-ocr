@@ -1,0 +1,7 @@
+<?php
+
+declare(strict_types=1);
+
+namespace ImranDevBd\AiOcr\Exceptions;
+
+class SchemaValidationException extends AiOcrException {}

@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1400" height="500" viewBox="0 0 1400 500" role="img" aria-labelledby="title desc">
+<title id="title">Laravel AI OCR — Documents in. Business data out.</title>
+<desc id="desc">Manual-first Laravel extraction: native text, local OCR, quality checks and targeted AI fallback.</desc>
+<defs><linearGradient id="bg" x2="1" y2="1"><stop stop-color="#071e28"/><stop offset="1" stop-color="#103b3d"/></linearGradient><linearGradient id="glow"><stop stop-color="#36d3b3"/><stop offset="1" stop-color="#6de3d8"/></linearGradient></defs>
+<rect width="1400" height="500" rx="24" fill="url(#bg)"/>
+<circle cx="1240" cy="70" r="280" fill="#3fcbb3" opacity=".035"/><circle cx="1320" cy="120" r="200" fill="#3fcbb3" opacity=".04"/>
+<g font-family="system-ui,Segoe UI,Arial,sans-serif">
+<rect x="64" y="48" width="214" height="32" rx="16" fill="#184c4b"/><text x="84" y="70" font-size="14" fill="#8cf1d7" letter-spacing="2">LARAVEL AI OCR</text>
+<text x="64" y="147" font-size="54" fill="#f1faf9" font-weight="700">Documents in.</text><text x="64" y="212" font-size="54" fill="#74e9d2" font-weight="700">Business data out.</text>
+<text x="66" y="259" font-size="21" fill="#bdd5d5">Native extraction. Local OCR. AI when needed.</text>
+<text x="66" y="293" font-size="18" fill="#8eafaf">One fluent API for your Laravel document workflows.</text>
+<g transform="translate(815 72)"><rect width="520" height="274" rx="18" fill="#071b24" stroke="#335c60"/><circle cx="25" cy="25" r="5" fill="#f47979"/><circle cx="44" cy="25" r="5" fill="#e6c56c"/><circle cx="63" cy="25" r="5" fill="#5dd1ad"/>
+<text x="28" y="87" fill="#a0e5d8" font-size="19" font-family="ui-monospace,Consolas,monospace">AiOcr::file($invoice)</text><text x="55" y="124" fill="#d5e7ea" font-size="19" font-family="ui-monospace,Consolas,monospace">-&gt;as('invoice')</text><text x="55" y="161" fill="#d5e7ea" font-size="19" font-family="ui-monospace,Consolas,monospace">-&gt;maxCost(0.05)</text><text x="55" y="198" fill="#74e9d2" font-size="19" font-family="ui-monospace,Consolas,monospace">-&gt;extract();</text><text x="28" y="245" fill="#789b9e" font-size="14">Text + fields + evidence + trace + cost</text></g>
+<path d="M65 352H1335" stroke="#305354"/>
+<g fill="#f1faf9" font-size="23" font-weight="600"><text x="66" y="402">23 document types</text><text x="440" y="402">5 extraction strategies</text><text x="885" y="402">Local + AI processing</text></g>
+<g fill="#8eafaf" font-size="15"><text x="66" y="434">Invoices, receipts, identity, shipping and more</text><text x="440" y="434">Choose the workflow your business needs</text><text x="885" y="434">Privacy policies and visible usage</text></g>
+<text x="66" y="475" fill="#6e9799" font-size="13">BY IMRAN AHMED · IMRANDEV.BD</text></g></svg>

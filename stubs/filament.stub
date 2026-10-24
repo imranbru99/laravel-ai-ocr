@@ -1,0 +1,25 @@
+<?php
+namespace Filament\Contracts;
+interface Plugin { public function getId(): string; public function register(\Filament\Panel $panel): void; public function boot(\Filament\Panel $panel): void; }
+namespace Filament;
+class Panel { /** @param array<\Filament\Navigation\NavigationItem> $items */ /** @param array<class-string> $items */ public function resources(array $items): static {} /** @param array<class-string> $items */ public function widgets(array $items): static {} /** @param array<\Filament\Navigation\NavigationItem> $items */ public function navigationItems(array $items): static {} }
+namespace Filament\Navigation;
+class NavigationItem { public static function make(?string $label = null): static {} public function url(string|\Closure|null $url, bool|\Closure $shouldOpenInNewTab = false): static {} public function visible(bool|\Closure $condition = true): static {} }
+
+namespace Filament\Resources;
+abstract class Resource {
+ public static function getModel(): string {} public static function getNavigationLabel(): string {} public static function canViewAny(): bool {} public static function canCreate(): bool {}
+ /** @return \Illuminate\Database\Eloquent\Builder<\Illuminate\Database\Eloquent\Model> */ public static function getEloquentQuery(): \Illuminate\Database\Eloquent\Builder {}
+ public static function table(\Filament\Tables\Table $table): \Filament\Tables\Table {} /** @return array<string, \Filament\Resources\Pages\PageRegistration> */ public static function getPages(): array {}
+}
+namespace Filament\Tables;
+class Table { /** @param array<\Filament\Tables\Columns\TextColumn> $columns */ public function columns(array $columns): static {} public function defaultSort(string $column,string $direction='asc'): static {} }
+namespace Filament\Tables\Columns;
+class TextColumn { public static function make(string $name): static {} public function label(string $label): static {} public function searchable(): static {} public function sortable(): static {} public function badge(): static {} public function numeric(?int $decimalPlaces=null): static {} public function dateTime(): static {} }
+namespace Filament\Resources\Pages;
+class PageRegistration {}
+class ListRecords { protected static string $resource; /** @return array<\Filament\Actions\Action> */ protected function getHeaderActions(): array {} public static function route(string $path): PageRegistration {} }
+namespace Filament\Actions;
+class Action { public static function make(string $name): static {} public function label(string $label): static {} public function url(string $url): static {} }
+namespace Filament\Widgets;
+abstract class Widget { public static function canView(): bool {} public function render(): \Illuminate\Contracts\View\View {} }
